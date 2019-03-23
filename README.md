@@ -39,7 +39,6 @@ As this is an chrome - extension, there is nothing to install. Just load the plu
 ## Contributors:   
 - [@amitmahajan29](https://github.com/amitmahajan29)  
 - [@akshay2102](https://github.com/akshay2102)
-    
 - [@atharvagole](https://github.com/AtharvaGole)   
 - [@harshaldedhia](https://github.com/harshaldedhia)
 - [@Ye11ow-Flash](https://github.com/Ye11ow-Flash) 
