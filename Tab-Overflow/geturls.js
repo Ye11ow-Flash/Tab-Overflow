@@ -11,21 +11,30 @@ chrome.tabs.onRemoved.addListener(function(tabId, removeInfo){
 
 chrome.tabs.onMoved.addListener(function(tabId, moveInfo){
   chrome.windows.getAll({populate:true}, getAllOpenWindows);
+
 });
+
+chrome.tabs.onActivated.addListener(function(activeInfo){
+  chrome.windows.getAll({populate:true}, getAllOpenWindows);
+});
+
 
 function getAllOpenWindows(winData) {
 
     var tabs = [];
     var tab_ids = [];
     var tab_titles = [];
+    // var tab_open_time = [];
     for (var i in winData) {
-      if (winData[i].focused === true) {
+      if (winData[i].focused === true) 
+      {
           var winTabs = winData[i].tabs;
           var totTabs = winTabs.length;
-          for (var j=0; j<totTabs;j++) {
+          for (var j=0; j<totTabs;j++) 
+          {
             tabs.push(winTabs[j].url);
-			tab_ids.push(winTabs[j].id);
-            tab_titles.push(winTabs[j].title);
+			      tab_ids.push(winTabs[j].id);
+            tab_titles.push(winTabs[j].title);           
           }
       }
     }
@@ -40,19 +49,3 @@ function getAllOpenWindows(winData) {
        console.log('Value is set to ' + tab_titles);
     });
 }
-
-// var ul = document.getElementById('list');
-// for (var i = 0; i < tabs.length; i++) {
-//  var li = document.createElement('li');
-//  var anc= document.createElement('a');
-//  anc.setAttribute('href', tabs[i]);
-//  var temp = document.createTextNode(tabs[i]);
-//  anc.appendChild(temp);
-//  if(anc != null){
-//    li.appendChild(anc);
-//    if(li != null){
-//      ul.appendChild(li);
-//    }
-//  }
-//  // document.getElementById('#list').value() = tabs[i];
-// }

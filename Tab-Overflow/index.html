@@ -3,35 +3,19 @@
     <title>Home</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="1051158247148-pnsimm52hgtvqaoaqj94guertn7ffsio.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="/oauth2/oauth2.js"></script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <!-- <script type="text/javascript" src="LocalStorageHandler/LocalStorageHandler.js"></script> -->
+
     <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
     <script type="text/javascript" src="login.js"></script>
     <script type="text/javascript" src="popup.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <!-- <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-    <script type="text/javascript" src="geturls.js"></script>
-    <script src="signin.js"> -->
-<!-- 
-        //Wg83qAWIAC2yTFpxqUQ5qIEu
+    <link rel="stylesheet" type="text/css" href="css/snackbar.css">
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
-    </script> -->
-    <!-- <style type="text/css">
-        .g-signin2 {
-            margin-left: 500px;
-            margin-top: 200px;
-        }
-    </style> -->
 </head>
 <body style="width: 300px; height: auto; margin-bottom: 5%;">
-    <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
     <div class="container">
         <div id="yet_to_login" style="display: block;">
             <div class="button_of_selection" style="border-bottom: 1px solid black; padding-bottom: 2px;">
@@ -40,7 +24,6 @@
                 margin-left: 21%;">Signup</button>
             </div>
             <div class="login_form_div" id="login_form_div" style="display: none;">
-                <!-- <h2 class="jumbotron">Login</h2> -->
                 <img src="logo.png" alt="LOGO" style="height: 30%; padding-top: 10px; width: 30%;"><h2 class="jumbotron" style="display: inline; height: 30%; padding-top: 2px; font-size: 50px; margin-left: 15px;">Login</h2>
                 <div class="form-group">
                     <label for="login_emailId">Username</label>
@@ -70,10 +53,6 @@
         <div id="loggedin" style="display: none;">
             <button class="btn btn-danger" id="signout_button" value="signout">Signout</button>
         </div>
-        <!--
-        <h4>Go to Options Page</h4>
-        <button id="btn" class="btn btn-primary">Click Me</button>
-        -->
     </div>
 </body>
 </html>

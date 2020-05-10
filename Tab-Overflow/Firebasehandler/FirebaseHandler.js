@@ -1,44 +1,27 @@
-/*
-var ref=database.ref("players/A");
-//emailid/activity/taskname/task1
-
-ref.push ({
-John1: {
-number: 1,
-age: 30
-},
-
-Amanda1: {
-number: 2,
-age: 20
-}
-});
-*/
-
 var database;
 var emailid;
-
-// addemailid(database,emailid);
+var password;
 
 chrome.storage.sync.get('loggedinuser',function(result) {
-	emailid=result.loggedinuser;
-	addemailid(database,emailid);
+	emailid=result.loggedinuser[0];
+	password = result.loggedinuser[1];
+	addemailid(database,emailid,password);
 	firebasetolocalstorage();
 });
 
 database = initialize();
 
 function initialize() {
-	
 	// Initialize Firebase
-	
 	var config = {
-		apiKey: "AIzaSyDaNbzEFqZipyNCwPtpw0DvaE2JfRyVibg",
-		authDomain: "myawesomeproject-6f21b.firebaseapp.com",
-		databaseURL: "https://myawesomeproject-6f21b.firebaseio.com",
-		projectId: "myawesomeproject-6f21b",
-		storageBucket: "myawesomeproject-6f21b.appspot.com",
-		messagingSenderId: "246510264117"
+		apiKey: "AIzaSyBZLjAibU87dTVm4-9LwEXSP3lrN1fO31M",
+	    authDomain: "tab-manager-6664d.firebaseapp.com",
+	    databaseURL: "https://tab-manager-6664d.firebaseio.com",
+	    projectId: "tab-manager-6664d",
+	    storageBucket: "tab-manager-6664d.appspot.com",
+	    messagingSenderId: "860645458052",
+	    appId: "1:860645458052:web:32f8786cb8b1c2b48402d1",
+	    measurementId: "G-WPHWP33MWQ"
 	};
 	firebase.initializeApp(config);
   
@@ -50,9 +33,7 @@ function initialize() {
 }
 
 function getvalidkey(key) {
-	
 	//Getting valid key by removing ".", "#", "$", "[", or "]" from the key
-	
 	var validkey="";
 	
 	for(var i=0;i<key.length;i++) {
@@ -60,20 +41,10 @@ function getvalidkey(key) {
 			validkey=validkey.concat(key[i]);
 		}
 	}
-	
 	return validkey;
-	
 }
 
-/*
-function addemailid(database,emailId) {
-	var ref=database.ref(getvalidkey(emailId));
-	ref.push({emailid:emailId});
-}
-*/
-
-
-function addemailid(database,emailId) {
+function addemailid(database,emailId,password) {
 	var ref = database.ref();
 		
 	console.log("11111111 "+emailId);
@@ -83,13 +54,14 @@ function addemailid(database,emailId) {
 			if(!snapshot.hasChild(emailId)) {
 				console.log(emailId+" Added");
 				var ref1=database.ref(getvalidkey(emailId));
-				ref1.push({emailid:emailId});
+				ref1.push({emailid:emailId, password:password});
 				addactivity(database,emailId,"default_activity_123");
+				addactivity(database,emailId,"blocked_url");
 			}
 			else {
+				alert(emailId+" already exists!");
 				console.log("Emailid exists");
-			}
-			
+			}		
     });
 	
 }
@@ -102,8 +74,6 @@ function getemailidsactivity(database) {
 	
 	ref.once('value').then(function(snapshot){
 		ul = document.getElementById("show_email_ids");
-	//var arr = get_all_email_ids();
-
 	for(var i=0;i<arr.length;i++)
 	{
 		var li = document.createElement("li");
@@ -115,7 +85,6 @@ function getemailidsactivity(database) {
 		li.onclick = function() {
 			document.getElementById("modal_text_input").value = this.innerHTML;
 			this.parentNode.style.display = "none";
-			//alert(document.getElementById("modal_text_input").value);
 		};
 		ul.appendChild(li);
 	}
@@ -134,17 +103,10 @@ function getemailidsactivity(database) {
 		li.onclick = function() {
 			document.getElementById("a_modal_text_input").value = this.innerHTML;
 			this.parentNode.style.display = "none";
-			//alert(document.getElementById("modal_text_input").value);
 		};
 		ul.appendChild(li);
 	}
 	ul.style.display = "none";
-		// var i=1;
-		// 	snapshot.forEach(function(childSnapshot){
-		// 	k = childSnapshot.key;
-		// 	document.getElementById(id).innerHTML = k;
-		// 	i++;
-		// });
     });
 }
 
@@ -158,10 +120,8 @@ function getemailidstask(database) {
 	ref.once('value').then(function(snapshot){
 		ul = document.getElementById("show_email_ids");
 		ul1 = document.getElementById("a_show_email_ids");
-	// var arr = get_all_email_ids();
 	snapshot.forEach(function(childSnapshot){
 			k = childSnapshot.key;
-			// document.getElementById(id).innerHTML = k;
 			var li = document.createElement("li");
 			li.appendChild(document.createTextNode(k));
 			li.setAttribute("value", k);
@@ -171,7 +131,6 @@ function getemailidstask(database) {
 			li.onclick = function() {
 				document.getElementById("modal_text_input").value = this.innerHTML;
 				this.parentNode.style.display = "none";
-				//alert(document.getElementById("modal_text_input").value);
 			};
 
 			var li1 = document.createElement("li");
@@ -183,48 +142,17 @@ function getemailidstask(database) {
 			li1.onclick = function() {
 				document.getElementById("a_modal_text_input").value = this.innerHTML;
 				this.parentNode.style.display = "none";
-				//alert(document.getElementById("modal_text_input").value);
 			};
 
 			ul.appendChild(li);
 			ul1.appendChild(li1);
-			// i++;
 		});
-	// for(var i=0;i<arr.length;i++)
-	// {
-	// 	var li = document.createElement("li");
-	// 	li.appendChild(document.createTextNode(arr[i]));
-	// 	li.setAttribute("value", arr[i]);
-	// 	li.setAttribute("display", "none");
-	// 	li.setAttribute("class", "list-group-item");
-	// 	li.setAttribute("style", "width: 100%;");
-	// 	li.onclick = function() {
-	// 		document.getElementById("modal_text_input").value = this.innerHTML;
-	// 		this.parentNode.style.display = "none";
-	// 		//alert(document.getElementById("modal_text_input").value);
-	// 	};
-	// 	ul.appendChild(li);
-	// }
+
 	ul.style.display = "none";
 	ul1.style.display = "none";
 
-			// var i=1;
-		// 	snapshot.forEach(function(childSnapshot){
-		// 	k = childSnapshot.key;
-		// 	document.getElementById(id).innerHTML = k;
-		// 	i++;
-		// });
     });
 }
-
-
-/*
-function addactivity(database,emailid,activity) {
-	var ref=database.ref(getvalidkey(emailid+"/"+activity));
-	ref.push({activity:activity});
-}
-*/
-
 
 function addactivity(database,emailId,activity) {
 	var ref = database.ref(getvalidkey(emailId));
@@ -237,7 +165,14 @@ function addactivity(database,emailId,activity) {
 				console.log(activity+" Added");
 				var ref1=database.ref(getvalidkey(emailId+"/"+activity));
 				ref1.push({activity:activity});
-				addtask(database,emailId,activity,"default_task_123");
+				if(activity == "blocked_url")
+				{
+					addtask(database,emailId,activity,"blocked");
+				}
+				else
+				{
+					addtask(database,emailId,activity,"default_task_123");
+				}
 			}
 			else {
 				console.log("Activity exists");
@@ -246,7 +181,6 @@ function addactivity(database,emailId,activity) {
     });
 	
 }
-
 
 function getactivities(database,emailid,id) {
 	var ref = firebase.database().ref(emailid);
@@ -270,7 +204,6 @@ function removeactivity(database,emailid,activity) {
 	ref.child(activity).remove();
 }
 
-
 function renameactivity(database,emailid,oldactivity,newactivity) {
 	console.log("11111111115555 "+JSON.stringify(globaldatabase[newactivity]));
 	//console.log("11111111115555 "+JSON.stringify(globaldatabase[emailid]));
@@ -288,7 +221,6 @@ function renameactivity(database,emailid,oldactivity,newactivity) {
 	removeactivity(database,emailid,oldactivity);
 }
 
-
 function renametask(database,emailid,activity,oldtask,newtask) {
 	console.log("11111111115555 "+JSON.stringify(globaldatabase[activity]));
 	//console.log("11111111115555 "+JSON.stringify(globaldatabase[emailid]));
@@ -301,8 +233,6 @@ function renametask(database,emailid,activity,oldtask,newtask) {
 	} 	
 	removetask(database,emailid,activity,oldtask);
 }
-
-
 
 function shareactivity(database,emailid1,emailid2,activity) {
 	//console.log("11111111115555 "+JSON.stringify(globaldatabase[newactivity]));
@@ -321,7 +251,6 @@ function shareactivity(database,emailid1,emailid2,activity) {
 		
 	} 	
 }
-
 
 function sharetask(database,emailid1,emailid2,activity,task) {
 	//console.log("11111111115555 "+JSON.stringify(globaldatabase[newactivity]));
@@ -343,16 +272,6 @@ function sharetask(database,emailid1,emailid2,activity,task) {
 }
 
 
-
-
-
-/*
-function addtask(database,emailid,activity,task) {
-	var ref=database.ref(getvalidkey(emailid+"/"+activity+"/"+task));
-	ref.push({task:task});
-}
-*/
-
 function addtask(database,emailId,activity,task) {
 	var ref = database.ref(getvalidkey(emailId+"/"+activity));
 		
@@ -360,19 +279,24 @@ function addtask(database,emailId,activity,task) {
 	ref.once('value').then(function(snapshot){
 			if(!snapshot.hasChild(task)) {
 				console.log(task+" Added");
+				if(activity == "blocked_url")
+				{
+					if(snapshot.numChildren() >= 2)
+					{
+						alert("This is blocked url!");
+						addURL(database,emailId,activity,"blocked",snapshot.numChildren()+1,task)
+					}
+				}
 				var ref1=database.ref(getvalidkey(emailId+"/"+activity+"/"+task));
 				ref1.push({task:task});
 				addURL(database,emailId,activity,task,"default_id_123","1");
 			}
 			else {
+				alert(task+" already exists!")
 				console.log("Task exists");
 			}
-			
     });
-	
 }
-
-
 
 function gettasks(database,emailid,activity,id) {
 	var ref = firebase.database().ref(emailid+"/"+activity);
@@ -396,16 +320,6 @@ function removetask(database,emailid,activity,task) {
 	ref.child(task).remove();
 }
 
-
-
-/*
-function addURL(database,emailid,activity,task,URL) {
-	var ref=database.ref(getvalidkey(emailid+"/"+activity+"/"+task+"/"+URL));
-	ref.set({URL:URL});
-}
-*/
-
-
 function addURL(database,emailId,activity,task,id,url) {
 	var ref=database.ref(getvalidkey(emailId+"/"+activity+"/"+task));
 		
@@ -421,13 +335,9 @@ function addURL(database,emailId,activity,task,id,url) {
 			}
 			else {
 				console.log("URL exists");
-			}
-			
+			}	
     });
-
 }
-
-
 
 function getURLS(database,emailid,activity,task,id) {
 	var ref = firebase.database().ref(emailid+"/"+activity+"/"+"task");
@@ -474,41 +384,6 @@ function getAllData(database,emailid) {
 		});
     });
 }
-
-/*
-function firebasetolocalstorage() {
-	var ref=firebase.database().ref(getvalidkey(emailid));
-		
-	ref.on('value',function(snapshot){
-		console.log(snapshot.numChildren());
-		snapshot.forEach(function(snapshot_activities){
-			// console.log(snapshot.numChildren());
-			var activity=snapshot_activities.key;
-			if(activity[0]!="-") {
-				console.log(activity);
-				snapshot_activities.forEach(function(snapshot_tasks){
-					var task=snapshot_tasks.key;
-					if(task[0]!="-") {
-						console.log(task);
-						snapshot_tasks.forEach(function(snapshot_urlids){
-							var urlid=snapshot_urlids.key;
-							if(urlid[0]!="-") {
-								console.log(urlid);
-								snapshot_urlids.forEach(function(snapshot_urls){
-									var urlid=snapshot_urls.key;
-									var v=snapshot_urls.val();
-										console.log(urlid+" "+v);
-								});
-							}
-						});
-					}
-				});
-			}
-		});
-    });	
-}
-*/
-
 
 function firebasetolocalstorage() {
 	var ref=firebase.database().ref(getvalidkey(emailid));
@@ -567,53 +442,12 @@ function firebasetolocalstorage() {
 					j++;
 					}
 				});
-			
 			i++;
-			}
-			
-			/*
-			if(i==total_activities) {
-				
-			}
-			*/
-			
+			}	
 		});
     });	
 }
-
-/*
-function addtoanotheraccount(database,emailid1,emailid2) {
-	var ref1=database.ref(emailid1);
-	var ref2=database.ref(emailid2);
-	
-	
-	ref1.on('value',function(snapshot){
-		ref2.push(snapshot.val());
-    });
-	
-}
-*/
-
-
 function removeempty() {}
-
-// initialize();
-console.log(8888881111111);
-// firebasetolocalstorage();
-
 document.addEventListener("DOMContentLoaded", function(){
-	//initialize();
-	//addemailid(database,emailid);
-	//addactivity(database,emailid,"Study");
-	//addemailid(database,emailid);
-	//addtask(database,emailid,"Study","Stackoverflow");
-	//addURL(database,emailid,"Study","Stackoverflow","1","https://stackoverflow.com/");
-	//addURL(database,emailid,"Study","Stackoverflow","2","https://stackoverflow.com/questions/55189704/nodejs-crypto-fails-to-verify-signature-created-by-web-crypto-api");
-	//addURL(database,emailid,"Study","Stackoverflow","3","https://stackoverflow.com/questions/55180829/python-if-else-code-style-for-reduced-code");
-	//firebasetolocalstorage();
-	
-	// addtostorage(d);
-	// getfromstorage();
-	
-	// getfromstorage();
+
 });

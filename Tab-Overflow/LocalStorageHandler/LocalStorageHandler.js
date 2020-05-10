@@ -102,34 +102,6 @@ function getURLs(activity,task) {}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function load_activities()
 {
 	alert("Inside load_activities()");
@@ -146,6 +118,7 @@ function load_activities()
 		option.innerHTML = activities[i];
 		select_tag_of_activities.appendChild(option);
 	}
+
 	var add_activity = document.createElement("button");
 	add_activity.setAttribute("type", "button");
 	add_activity.setAttribute("class", "btn btn-default btn-lg btn-activity-add activity-btns");
@@ -197,8 +170,6 @@ function load_activities()
 			get_activity_name();
 			//select_tag.insertBefore(option,select_tag.childNodes[3]);
 			text_input.remove();
-			
-			
 			this.remove();
 		};
 	};

@@ -4,12 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Custom fonts for this template-->
-  <!-- <link href="css/all.min.css" rel="stylesheet" type="text/css"> -->
-  
-  <!-- Custom styles for this template-->
-  <!-- <link href="css/dashboard.css" rel="stylesheet"> -->
-  <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
   <link href="https://cdn.jsdelivr.net/css-toggle-switch/latest/toggle-switch.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/Template_Files/bootsnip_template.css">
@@ -29,33 +23,11 @@
 
 <body id="body_tag">
 <div>
-<!-- <nav class="navbar navbar-default navv">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <img src="logo.png" alt="LOGO" id="logo-image"><h1 id="tab-overflow">Tab - Overflow</h1>
-        <button id="sort_btn" class="btn btn-default btn-lg" style="float: right;">
-          <span class="glyphicon glyphicon-sort"></span> Sort
-        </button>
-    </div>
-  </div> -->
-
-  <!-- <ul class="nav navbar-nav navbar-right">
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle sort-btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort <span class="caret"></span></a>
-      <ul class="dropdown-menu">
-        <li><a href="#" class="ss">Classification</a></li>
-        <li role="separator" class="divider"></li>
-        <li><a href="#" class="ss">Alphabetically</a></li>
-      </ul>
-    </li>
-  </ul>
-  32,32,32,0.75
-</nav> -->
 <div id="extra_buttons" style="background: rgb(174, 0, 61);">
   <div style="width: 100%;">
   	<marquee direction="right" style="width: 85%" scrollamount="30">
-    	<img src="logo.png" alt="LOGO" id="logo-image">
-	</marquee>
+    	<img src="LOGO.PNG" alt="LOGO" id="logo-image">
+	  </marquee>
 
     <div class="inner-bb">
       <button id="s-b-1" class="btn btn-default btn-lg sort_btn" style="float: right;">
@@ -65,14 +37,20 @@
       <button id="s-b-2" class="btn btn-default btn-lg sort_btn" style="float: right;">
             <span class="glyphicon glyphicon-sort"></span>Alphabetically
       </button>
+      <button id="s-b-3" class="btn btn-default btn-lg sort_btn" style="float: right;">
+          <span>Logout</span>
+    </button>
     </div>
   </div>
 </div>
-
 <div class="demo" id="demo">
+    <div id="outer_blockedDiv">
+        <div class="col-md-3" id="inner_blocked">
+          
+        </div>
+    </div>
     <div class="container">
         <div class="row" style="padding:10px;">
-            <!-- <div class="col-md-4"></div> -->
           <div class="col-md-6" id="select_shit">
             <select class="form-control input-lg" id="select_activity">
               <option disabled selected>Select the activity</option>
@@ -82,27 +60,15 @@
             <button id="rename_activity" class="btn btn-default btn-lg activity-btns" style="float: right; visibility: hidden;"><span class="glyphicon glyphicon-pencil"></span></button> 
           </div>
         <div class="col-md-4 act" id="rename_activity_elements_div"></div>
-        <!-- <div class="tog">
-          <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
-        </div> -->
         <div class="switch-toggle switch-3 switch-candy tog" id="tog">
           <input id="on" name="state-d" type="radio" checked="" style="background-color: black;"/>
-          <label for="on" class="tog-lab" onclick="">Dark</label>
-
-          <!-- <input id="na" name="state-d" type="radio" disabled checked="checked" />
-          <label for="na" class="disabled" onclick="">&nbsp;</label> -->
-
+          <label for="on" class="tog-lab" >Dark</label>
           <input id="off" name="state-d" type="radio" style="background-color: #87ceeb;"/>
           <label for="off" class="tog-lab" onclick="">Light</label>
 
           <a></a>
         </div>
-        <!-- <div>
-          <input type="checkbox" checked data-toggle="toggle" data-style="ios">
-        </div> -->
+
       </div>
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
@@ -156,7 +122,6 @@
         </div>
       </div>
 
-
           <div class="row major">
               <div class="col-md-4 col-sm-6">
                   <div class="pricingTable" style="overflow-y: auto;">
@@ -175,30 +140,15 @@
                           <text transform="matrix(1 0 0 1 233.9629 115.5303)" fill="#fff" font-size="15.4128">'</text> -->
                       </svg>
                       <div class="pricing-content" id="tasks">
-
-                        <!-- <div class="row">
-                          <div class="col-md-9 col-md-offset-3">
-                              <form action="" class="search-form">
-                                  <div class="form-group has-feedback">
-                                  <label for="search" class="sr-only">Search</label>
-                                  <input type="text" class="form-control" name="search" id="search" placeholder="search">
-                                    <span class="glyphicon glyphicon-search form-control-feedback" ></span>
-                                </div>
-                              </form>
-                          </div>
-                      </div> -->
                         <div class="active-pink-3 active-pink-4 mb-4 srch">
                           <input id="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
-                        </div>
-                          
+                        </div>              
                           <ul class="pricing-content" id="task">
-                              <!-- <li><b>50GB</b> Disk Space</li>
-                              <li><b>50</b> Email Accounts</li>
-                              <li><b>50GB</b> Bandwidth</li>
-                              <li><b>10</b> Subdomains</li>
-                              <li><b>15</b> Domains</li> -->
+                              
                           </ul>
-                          <div id="task_entry"></div>
+                          <div id="task_entry">
+
+                          </div>
                       </div>
                   </div>
               </div>
@@ -216,12 +166,11 @@
                           <text transform="matrix(1 0 0 1 233.9629 115.5303)" fill="#fff" font-size="15.4128">/Month</text> -->
                       </svg>
                       <div class="pricing-content" id="open_tabs_div" style="display: none;">
+                          <div class="active-pink-3 active-pink-4 mb-4 srch">
+                              <input id="search_open_tabs" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                          </div>
                           <ul class="pricing-content" id="open_tabs">
-                              <!-- <li><b>60GB</b> Disk Space</li>
-                              <li><b>60</b> Email Accounts</li>
-                              <li><b>60GB</b> Bandwidth</li>
-                              <li><b>15</b> Subdomains</li>
-                              <li><b>20</b> Domains</li> -->
+                              
                           </ul>
                       </div>
                   </div>
@@ -241,16 +190,15 @@
                         <text transform="matrix(1 0 0 1 233.9629 115.5303)" fill="#fff" font-size="15.4128">/Month</text> -->
                     </svg>
                     <div class="pricing-content" id="saved_tabs_div">
+                        <div class="active-pink-3 active-pink-4 mb-4 srch">
+                            <input id="search_saved_tabs" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                        </div>
                         <ul class="pricing-content" id="saved_tabs">
-                            <!-- <li><b>70GB</b> Disk Space</li>
-                            <li><b>70</b> Email Accounts</li>
-                            <li><b>70GB</b> Bandwidth</li>
-                            <li><b>20</b> Subdomains</li>
-                            <li><b>25</b> Domains</li> -->
+                            
                         </ul>
                     </div>
                 </div>
-            </div>
+              </div>  
           </div>
       </div>
   </div>

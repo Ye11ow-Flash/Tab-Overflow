@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-	"name": "My extension",
+	"name": "cw-Tab",
 	"version":"1.0.0",
 	"browser_action": {
       "default_popup": "index.html"
@@ -10,6 +10,6 @@
 		"persistent": false
 	},
 	"options_page": "home.html", 
-	"permissions": ["tabs", "storage", "https://accounts.google.com/o/oauth2/token", "https://*.firebaseio.com/"],
+	"permissions": ["tabs", "storage", "https://accounts.google.com/o/oauth2/token", "https://*.firebaseio.com/", "identity"],
 	"content_security_policy": "script-src 'self' https://ajax.googleapis.com https://www.gstatic.com/ https://maxcdn.bootstrapcdn.com https://*.firebaseio.com https://www.googleapis.com https://cdn.firebase.com; object-src 'self'; connect-src 'self' wss://*.firebaseio.com;"
 }
